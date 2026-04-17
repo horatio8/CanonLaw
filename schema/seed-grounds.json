@@ -1,0 +1,198 @@
+[
+  {
+    "canonReference": "c. 1083 §1",
+    "shortName": "Age (lack of canonical age)",
+    "category": "Impediment",
+    "description": "Male has not completed 16 years, female has not completed 14 years.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1084",
+    "shortName": "Impotence",
+    "category": "Impediment",
+    "description": "Antecedent and perpetual impotence to have sexual intercourse.",
+    "expertUsuallyRequired": true
+  },
+  {
+    "canonReference": "c. 1085",
+    "shortName": "Prior bond (ligamen)",
+    "category": "PriorBond",
+    "description": "A person bound by a prior marriage even if not consummated.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1086",
+    "shortName": "Disparity of worship",
+    "category": "Impediment",
+    "description": "Between a Catholic and a non-baptized party without dispensation.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1087",
+    "shortName": "Sacred orders",
+    "category": "Impediment",
+    "description": "Those in sacred orders invalidly attempt marriage.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1088",
+    "shortName": "Public perpetual vow of chastity",
+    "category": "Impediment",
+    "description": "Those bound by public perpetual vow of chastity in a religious institute.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1089",
+    "shortName": "Abduction",
+    "category": "Impediment",
+    "description": "Between man and woman abducted or detained for marriage.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1090",
+    "shortName": "Crime (conjugicide)",
+    "category": "Impediment",
+    "description": "One who with intent to marry causes death of spouse or own spouse.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1091",
+    "shortName": "Consanguinity",
+    "category": "Impediment",
+    "description": "In direct line and collateral up to fourth degree inclusive.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1092",
+    "shortName": "Affinity",
+    "category": "Impediment",
+    "description": "In direct line in any degree.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1093",
+    "shortName": "Public propriety",
+    "category": "Impediment",
+    "description": "Arising from invalid marriage after common life or notorious concubinage.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1094",
+    "shortName": "Legal relationship (adoption)",
+    "category": "Impediment",
+    "description": "Between those joined by legal adoption in direct line or second degree collateral.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1095, 1°",
+    "shortName": "Lack of sufficient use of reason",
+    "category": "DefectOfConsent",
+    "description": "Incapable of the act of consent due to lack of sufficient use of reason.",
+    "expertUsuallyRequired": true
+  },
+  {
+    "canonReference": "c. 1095, 2°",
+    "shortName": "Grave defect of discretion of judgment",
+    "category": "DefectOfConsent",
+    "description": "Grave defect of discretion of judgment concerning the essential matrimonial rights and duties to be mutually given and accepted.",
+    "expertUsuallyRequired": true
+  },
+  {
+    "canonReference": "c. 1095, 3°",
+    "shortName": "Inability to assume essential obligations",
+    "category": "DefectOfConsent",
+    "description": "Unable to assume the essential obligations of marriage for causes of a psychic nature.",
+    "expertUsuallyRequired": true
+  },
+  {
+    "canonReference": "c. 1096",
+    "shortName": "Ignorance",
+    "category": "DefectOfConsent",
+    "description": "Ignorance that marriage is a permanent partnership ordered to procreation by sexual cooperation.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1097 §1",
+    "shortName": "Error concerning person",
+    "category": "Error",
+    "description": "Error concerning the person renders marriage invalid.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1097 §2",
+    "shortName": "Error concerning quality of person",
+    "category": "Error",
+    "description": "Error concerning a quality of the person directly and principally intended.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1098",
+    "shortName": "Deceit (dolus)",
+    "category": "Error",
+    "description": "Entered marriage deceived by fraud concerning a quality which by its nature can gravely disturb the partnership of conjugal life.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1101 §2",
+    "shortName": "Total simulation",
+    "category": "Simulation",
+    "description": "By a positive act of the will excluded marriage itself.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1101 §2 (bonum prolis)",
+    "shortName": "Exclusion of offspring",
+    "category": "Simulation",
+    "description": "By a positive act of the will excluded an essential property — openness to children.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1101 §2 (bonum fidei)",
+    "shortName": "Exclusion of fidelity",
+    "category": "Simulation",
+    "description": "By a positive act of the will excluded an essential property — exclusivity.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1101 §2 (bonum sacramenti)",
+    "shortName": "Exclusion of indissolubility",
+    "category": "Simulation",
+    "description": "By a positive act of the will excluded an essential property — perpetuity.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1101 §2 (bonum coniugum)",
+    "shortName": "Exclusion of the good of the spouses",
+    "category": "Simulation",
+    "description": "By a positive act of the will excluded the good of the spouses.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1102",
+    "shortName": "Future condition",
+    "category": "Condition",
+    "description": "Marriage subject to a condition concerning the future invalid.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1103",
+    "shortName": "Force and grave fear",
+    "category": "ForceFear",
+    "description": "Force or grave fear inflicted extrinsically from which the person has no escape except by choosing marriage.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1104",
+    "shortName": "Absence of physical presence or proxy",
+    "category": "DefectOfMandate",
+    "description": "Required physical presence or valid proxy lacking.",
+    "expertUsuallyRequired": false
+  },
+  {
+    "canonReference": "c. 1108 / c. 1117",
+    "shortName": "Defect of canonical form",
+    "category": "DefectOfForm",
+    "description": "Marriage of Catholics attempted outside the canonical form required for validity.",
+    "expertUsuallyRequired": false
+  }
+]

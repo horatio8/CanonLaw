@@ -1,0 +1,32 @@
+{
+  "name": "canon-law-tribunal",
+  "version": "0.1.0",
+  "description": "Canon Law Tribunal Management System — judicial process management for marriage nullity cases per 1983 Code of Canon Law (Mitis Iudex Dominus Iesus, 2015) and Dignitas Connubii (2005).",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "node --test --experimental-strip-types tests/deadlines.test.ts tests/gates.test.ts tests/incompatibility.test.ts tests/permissions.test.ts tests/documents.test.ts tests/state-machine.test.ts tests/automations.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "templates"
+  ],
+  "keywords": [
+    "canon-law",
+    "tribunal",
+    "marriage-nullity",
+    "mitis-iudex",
+    "airtable"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

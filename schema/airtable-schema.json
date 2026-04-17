@@ -1,0 +1,489 @@
+{
+  "$schema": "https://airtable.com/meta/schema",
+  "base": {
+    "name": "Canon Law Tribunal",
+    "description": "Marriage nullity tribunal management per 1983 CIC, Mitis Iudex Dominus Iesus (2015), Dignitas Connubii (2005)."
+  },
+  "tables": [
+    {
+      "name": "Cases",
+      "description": "Primary case record — one row per libellus.",
+      "fields": [
+        { "name": "Case ID", "type": "autoNumber" },
+        { "name": "Protocol Number", "type": "singleLineText", "description": "Tribunal-assigned (e.g. 2026/001)." },
+        {
+          "name": "Case Status",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Intake" },
+              { "name": "Pre-Admission Review" },
+              { "name": "Admitted" },
+              { "name": "Rejected" },
+              { "name": "Citation & Response" },
+              { "name": "Formula of Doubt" },
+              { "name": "Tribunal Constitution" },
+              { "name": "Instruction" },
+              { "name": "Publication of Acts" },
+              { "name": "Conclusion & Discussion" },
+              { "name": "Deliberation" },
+              { "name": "Sentence Drafting" },
+              { "name": "Sentence Publication" },
+              { "name": "Appeal Window" },
+              { "name": "Executive" },
+              { "name": "Briefer: Formula Routing" },
+              { "name": "Briefer: Instructor Appointed" },
+              { "name": "Briefer: Instructional Session" },
+              { "name": "Briefer: Bishop Decision" },
+              { "name": "Documentary: Preliminary Review" },
+              { "name": "Documentary: Judgment" }
+            ]
+          }
+        },
+        {
+          "name": "Process Type",
+          "type": "singleSelect",
+          "options": { "choices": [{ "name": "Ordinary" }, { "name": "Briefer" }, { "name": "Documentary" }] }
+        },
+        { "name": "Petitioner", "type": "multipleRecordLinks", "options": { "linkedTableName": "Persons" } },
+        { "name": "Respondent", "type": "multipleRecordLinks", "options": { "linkedTableName": "Persons" } },
+        { "name": "Marriage Date", "type": "date" },
+        { "name": "Marriage Place", "type": "singleLineText" },
+        { "name": "Diocese of Celebration", "type": "multipleRecordLinks", "options": { "linkedTableName": "Dioceses" } },
+        {
+          "name": "Competence Basis",
+          "type": "singleSelect",
+          "description": "c. 1672 as revised by Mitis Iudex.",
+          "options": {
+            "choices": [
+              { "name": "Place of Celebration" },
+              { "name": "Domicile — Petitioner" },
+              { "name": "Domicile — Respondent" },
+              { "name": "Domicile — Both" },
+              { "name": "Place of Proofs" }
+            ]
+          }
+        },
+        {
+          "name": "Competence Notes",
+          "type": "multilineText",
+          "description": "Explanation REQUIRED if Competence Basis = Place of Proofs."
+        },
+        { "name": "Grounds", "type": "multipleRecordLinks", "options": { "linkedTableName": "Case Grounds" } },
+        { "name": "Formula of Doubt", "type": "multilineText" },
+        { "name": "Date Filed", "type": "date" },
+        { "name": "Date Admitted", "type": "date" },
+        { "name": "Date of Formula", "type": "date" },
+        { "name": "Date Instruction Opened", "type": "date" },
+        { "name": "Date Publication Decree", "type": "date" },
+        { "name": "Date Conclusion Decree", "type": "date" },
+        { "name": "Date Sentence", "type": "date" },
+        { "name": "Date Sentence Published", "type": "date" },
+        { "name": "Date Executive", "type": "date" },
+        {
+          "name": "Appeal Status",
+          "type": "singleSelect",
+          "options": {
+            "choices": [{ "name": "None" }, { "name": "Pending" }, { "name": "Filed" }, { "name": "Resolved" }]
+          }
+        },
+        { "name": "One-Year Benchmark Flag", "type": "checkbox", "description": "Auto-set when admission + 1 year approaches (c. 1453)." },
+        { "name": "Assigned Tribunal", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunals" } },
+        { "name": "Notes", "type": "multilineText" }
+      ]
+    },
+    {
+      "name": "Persons",
+      "fields": [
+        { "name": "Person ID", "type": "autoNumber" },
+        { "name": "First Name", "type": "singleLineText" },
+        { "name": "Last Name", "type": "singleLineText" },
+        {
+          "name": "Title/Prefix",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Mr" },
+              { "name": "Mrs" },
+              { "name": "Ms" },
+              { "name": "Rev" },
+              { "name": "Rev Mr" },
+              { "name": "Msgr" },
+              { "name": "Most Rev" },
+              { "name": "His Excellency" },
+              { "name": "His Eminence" }
+            ]
+          }
+        },
+        {
+          "name": "Canonical Status",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Catholic" },
+              { "name": "Baptized Non-Catholic" },
+              { "name": "Unbaptized" }
+            ]
+          }
+        },
+        { "name": "Date of Birth", "type": "date" },
+        { "name": "Date of Baptism", "type": "date" },
+        { "name": "Parish of Baptism", "type": "singleLineText" },
+        { "name": "Diocese", "type": "multipleRecordLinks", "options": { "linkedTableName": "Dioceses" } },
+        { "name": "Domicile/Quasi-Domicile", "type": "multilineText", "description": "Per cc. 102–107." },
+        { "name": "Email", "type": "email" },
+        { "name": "Phone", "type": "phoneNumber" },
+        { "name": "Address", "type": "multilineText" },
+        {
+          "name": "Person Type",
+          "type": "multipleSelects",
+          "options": {
+            "choices": [
+              { "name": "Petitioner" },
+              { "name": "Respondent" },
+              { "name": "Witness" },
+              { "name": "Expert" },
+              { "name": "Guardian" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tribunal Personnel",
+      "fields": [
+        { "name": "Personnel ID", "type": "autoNumber" },
+        { "name": "Person", "type": "multipleRecordLinks", "options": { "linkedTableName": "Persons" } },
+        { "name": "Tribunal", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunals" } },
+        {
+          "name": "Canonical Role",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Judicial Vicar" },
+              { "name": "Adjunct Judicial Vicar" },
+              { "name": "Judge" },
+              { "name": "Defender of Bond" },
+              { "name": "Promoter of Justice" },
+              { "name": "Notary" },
+              { "name": "Auditor" },
+              { "name": "Assessor" },
+              { "name": "Advocate" },
+              { "name": "Procurator" },
+              { "name": "Tribunal Administrator" },
+              { "name": "Intake Officer" },
+              { "name": "Diocesan Bishop" }
+            ]
+          }
+        },
+        { "name": "Appointment Date", "type": "date" },
+        { "name": "Appointment Decree", "type": "multipleAttachments" },
+        { "name": "Active", "type": "checkbox" },
+        { "name": "Oath Taken", "type": "checkbox", "description": "c. 1454; DC art. 35." },
+        { "name": "Oath Date", "type": "date" },
+        { "name": "Qualifications", "type": "multilineText" }
+      ]
+    },
+    {
+      "name": "Case Assignments",
+      "fields": [
+        { "name": "Case", "type": "multipleRecordLinks", "options": { "linkedTableName": "Cases" } },
+        { "name": "Personnel", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunal Personnel" } },
+        {
+          "name": "Role in Case",
+          "type": "singleSelect",
+          "description": "Presiding Judge and Ponens are NOT interchangeable (c. 1429).",
+          "options": {
+            "choices": [
+              { "name": "Presiding Judge" },
+              { "name": "Ponens" },
+              { "name": "Associate Judge" },
+              { "name": "Defender of Bond" },
+              { "name": "Notary" },
+              { "name": "Auditor" },
+              { "name": "Instructor" },
+              { "name": "Assessor" },
+              { "name": "Advocate — Petitioner" },
+              { "name": "Advocate — Respondent" },
+              { "name": "Procurator — Petitioner" },
+              { "name": "Procurator — Respondent" }
+            ]
+          }
+        },
+        { "name": "Date Assigned", "type": "date" },
+        { "name": "Date Removed", "type": "date" },
+        { "name": "Assignment Decree", "type": "multipleRecordLinks", "options": { "linkedTableName": "Acts" } },
+        { "name": "Active on Case", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "Grounds of Nullity",
+      "fields": [
+        { "name": "Canon Reference", "type": "singleLineText" },
+        { "name": "Short Name", "type": "singleLineText" },
+        {
+          "name": "Category",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Defect of Consent" },
+              { "name": "Impediment" },
+              { "name": "Defect of Form" },
+              { "name": "Defect of Mandate" },
+              { "name": "Prior Bond" },
+              { "name": "Condition" },
+              { "name": "Simulation" },
+              { "name": "Force-Fear" },
+              { "name": "Error" }
+            ]
+          }
+        },
+        { "name": "Description", "type": "multilineText" },
+        { "name": "Expert Usually Required", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "Case Grounds",
+      "fields": [
+        { "name": "Case", "type": "multipleRecordLinks", "options": { "linkedTableName": "Cases" } },
+        { "name": "Ground", "type": "multipleRecordLinks", "options": { "linkedTableName": "Grounds of Nullity" } },
+        { "name": "Formula Text", "type": "multilineText" },
+        {
+          "name": "Disposition",
+          "type": "singleSelect",
+          "options": {
+            "choices": [{ "name": "Affirmative" }, { "name": "Negative" }, { "name": "Not Reached" }]
+          }
+        },
+        {
+          "name": "Attributed To",
+          "type": "singleSelect",
+          "options": {
+            "choices": [{ "name": "Petitioner" }, { "name": "Respondent" }, { "name": "Both" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Acts",
+      "description": "Every procedural act is a first-class object (c. 1437; DC art. 62).",
+      "fields": [
+        { "name": "Act ID", "type": "autoNumber" },
+        { "name": "Case", "type": "multipleRecordLinks", "options": { "linkedTableName": "Cases" } },
+        {
+          "name": "Act Type",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Libellus" },
+              { "name": "Admission Decree" },
+              { "name": "Rejection Decree" },
+              { "name": "Competence Memo" },
+              { "name": "Standing Check" },
+              { "name": "DBI Pre-Admission Votum" },
+              { "name": "Citation Decree" },
+              { "name": "Service Record" },
+              { "name": "Respondent Response" },
+              { "name": "Decree of Absence" },
+              { "name": "Formula of Doubt Decree" },
+              { "name": "Constitution Decree" },
+              { "name": "Auditor Mandate" },
+              { "name": "Party Examination" },
+              { "name": "Witness Examination" },
+              { "name": "Documentary Exhibit" },
+              { "name": "Expert Appointment" },
+              { "name": "Expert Questions" },
+              { "name": "Expert Report" },
+              { "name": "Rogatory Letter" },
+              { "name": "Rogatory Response" },
+              { "name": "Publication Decree" },
+              { "name": "Act Inspection Record" },
+              { "name": "Decree of Conclusion" },
+              { "name": "DBI Observations" },
+              { "name": "Party Brief" },
+              { "name": "Reply Brief" },
+              { "name": "Judge Written Conclusions (Sealed)" },
+              { "name": "Deliberation Record" },
+              { "name": "Sentence Draft" },
+              { "name": "Final Sentence" },
+              { "name": "Sentence Publication Record" },
+              { "name": "Appeal Petition" },
+              { "name": "Appeal Brief" },
+              { "name": "Non-Appeal Statement" },
+              { "name": "Executive Status Notice" },
+              { "name": "Decree of Remand" },
+              { "name": "Incidental Decree" },
+              { "name": "Nullity Complaint" },
+              { "name": "Supplemental Proof Decree" }
+            ]
+          }
+        },
+        {
+          "name": "Act Category",
+          "type": "singleSelect",
+          "options": {
+            "choices": [{ "name": "Procedural" }, { "name": "Merits" }, { "name": "Administrative" }]
+          }
+        },
+        { "name": "Title", "type": "singleLineText" },
+        { "name": "Content", "type": "multilineText" },
+        { "name": "Attachment", "type": "multipleAttachments" },
+        { "name": "Created By", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunal Personnel" } },
+        { "name": "Date Created", "type": "date" },
+        { "name": "Authenticated By Notary", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunal Personnel" } },
+        { "name": "Date Authenticated", "type": "date" },
+        { "name": "Is Authenticated", "type": "checkbox", "description": "CRITICAL — acts without this are NULL per c. 1437." },
+        { "name": "Protocol Page Number", "type": "number" },
+        { "name": "Inserted in Official Acts", "type": "checkbox" },
+        { "name": "Certified Copy Generated", "type": "checkbox" }
+      ]
+    },
+    {
+      "name": "Deadlines",
+      "fields": [
+        { "name": "Case", "type": "multipleRecordLinks", "options": { "linkedTableName": "Cases" } },
+        {
+          "name": "Deadline Type",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Respondent Initial Response" },
+              { "name": "Tacit Admission of Libellus" },
+              { "name": "Libellus Rejection Recourse" },
+              { "name": "Formula Recourse" },
+              { "name": "Briefer Process Session" },
+              { "name": "Briefer DBI/Party Observations" },
+              { "name": "Discussion Briefs" },
+              { "name": "Sentence Drafting" },
+              { "name": "Appeal Petition" },
+              { "name": "Appeal Prosecution" },
+              { "name": "First Instance Benchmark" },
+              { "name": "Second Instance Benchmark" }
+            ]
+          }
+        },
+        {
+          "name": "Computation Type",
+          "type": "singleSelect",
+          "options": { "choices": [{ "name": "Continuous" }, { "name": "Useful" }] }
+        },
+        { "name": "Start Date", "type": "date" },
+        { "name": "Due Date", "type": "date" },
+        { "name": "Responsible Role", "type": "singleLineText" },
+        { "name": "Responsible Person", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunal Personnel" } },
+        {
+          "name": "Status",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Active" },
+              { "name": "Met" },
+              { "name": "Expired" },
+              { "name": "Extended" },
+              { "name": "Waived" }
+            ]
+          }
+        },
+        {
+          "name": "Severity",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Validity (red)" },
+              { "name": "Procedural (amber)" },
+              { "name": "Advisory (yellow)" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Service Records",
+      "fields": [
+        { "name": "Case", "type": "multipleRecordLinks", "options": { "linkedTableName": "Cases" } },
+        { "name": "Act Served", "type": "multipleRecordLinks", "options": { "linkedTableName": "Acts" } },
+        { "name": "Served To", "type": "multipleRecordLinks", "options": { "linkedTableName": "Persons" } },
+        {
+          "name": "Service Mode",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Postal" },
+              { "name": "Personal" },
+              { "name": "Email" },
+              { "name": "Edict" },
+              { "name": "Through Procurator" }
+            ]
+          }
+        },
+        { "name": "Date Sent", "type": "date" },
+        { "name": "Date Received", "type": "date" },
+        { "name": "Proof of Service", "type": "multipleAttachments" },
+        { "name": "Undeliverable", "type": "checkbox" },
+        { "name": "Re-Service Attempts", "type": "number" }
+      ]
+    },
+    {
+      "name": "Tribunals",
+      "fields": [
+        { "name": "Name", "type": "singleLineText" },
+        {
+          "name": "Type",
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              { "name": "Diocesan" },
+              { "name": "Interdiocesan" },
+              { "name": "Metropolitan" },
+              { "name": "Roman Rota" }
+            ]
+          }
+        },
+        { "name": "Diocese", "type": "multipleRecordLinks", "options": { "linkedTableName": "Dioceses" } },
+        { "name": "Bishop Moderator", "type": "multipleRecordLinks", "options": { "linkedTableName": "Persons" } },
+        {
+          "name": "Instance Level",
+          "type": "singleSelect",
+          "options": { "choices": [{ "name": "First" }, { "name": "Second" }, { "name": "Third" }] }
+        },
+        { "name": "Appeal Tribunal", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunals" } }
+      ]
+    },
+    {
+      "name": "Dioceses",
+      "fields": [
+        { "name": "Name", "type": "singleLineText" },
+        { "name": "Metropolitan Province", "type": "singleLineText" },
+        { "name": "Country", "type": "singleLineText" },
+        { "name": "Bishop", "type": "multipleRecordLinks", "options": { "linkedTableName": "Persons" } }
+      ]
+    },
+    {
+      "name": "Tribunal Calendar",
+      "fields": [
+        { "name": "Tribunal", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunals" } },
+        { "name": "Date", "type": "date" },
+        {
+          "name": "Type",
+          "type": "singleSelect",
+          "options": {
+            "choices": [{ "name": "Holiday" }, { "name": "Closed" }, { "name": "Reduced Hours" }]
+          }
+        },
+        { "name": "Description", "type": "singleLineText" }
+      ]
+    },
+    {
+      "name": "Audit Log",
+      "fields": [
+        { "name": "Case", "type": "multipleRecordLinks", "options": { "linkedTableName": "Cases" } },
+        { "name": "Action", "type": "singleLineText" },
+        { "name": "Performed By", "type": "multipleRecordLinks", "options": { "linkedTableName": "Tribunal Personnel" } },
+        { "name": "Timestamp", "type": "dateTime" },
+        { "name": "Previous State", "type": "singleLineText" },
+        { "name": "New State", "type": "singleLineText" },
+        { "name": "Details", "type": "multilineText" }
+      ]
+    }
+  ]
+}
