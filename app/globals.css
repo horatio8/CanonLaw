@@ -1,0 +1,91 @@
+:root {
+  --bg: #fbfaf7;
+  --fg: #1a1a1a;
+  --muted: #666;
+  --border: #ddd;
+  --primary: #0b6bcb;
+  --primary-fg: #ffffff;
+  --danger: #c0392b;
+  --warn-bg: #fff4c7;
+  --warn-border: #e2c200;
+  --err-bg: #ffd6d6;
+  --err-border: #c00;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1 { font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: .4rem; }
+h2 { font-size: 1.1rem; margin-top: 2rem; }
+
+button, .btn {
+  background: var(--primary);
+  color: var(--primary-fg);
+  border: 0;
+  padding: .55rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: .95rem;
+  text-decoration: none;
+  display: inline-block;
+}
+button.secondary, .btn.secondary { background: #555; }
+button.danger, .btn.danger { background: var(--danger); }
+button[disabled] { opacity: .5; cursor: not-allowed; }
+
+input, select {
+  font: inherit;
+  padding: .45rem .6rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+label { display: inline-flex; gap: .5rem; align-items: center; margin-right: .5rem; }
+
+nav { margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+nav a { margin-right: 1rem; color: var(--primary); text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+
+code {
+  background: #f4f4f4;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: .9em;
+}
+
+.muted { color: var(--muted); font-size: .9em; }
+
+.flash {
+  padding: .6rem .9rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+}
+.flash.error { background: var(--err-bg); border-color: var(--err-border); }
+
+ul.bases { list-style: none; padding: 0; }
+ul.bases li {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: .7rem;
+  margin-bottom: .4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+ul.bases li .grow { flex: 1; }
+
+.form-row { margin: .5rem 0; display: flex; gap: .5rem; align-items: center; }

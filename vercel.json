@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "functions": {
+    "app/api/airtable/callback/route.ts": { "maxDuration": 30 },
+    "app/admin/bases/actions.ts": { "maxDuration": 60 }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/purge-oauth-state",
+      "schedule": "0 * * * *"
+    }
+  ]
+}

@@ -133,45 +133,43 @@ Provisioning approach: pass this file to an Airtable Metadata API client to crea
 
 ## Super-admin: connect Airtable & select a base
 
-The repo ships with a small HTTP admin console that handles Airtable OAuth 2.0 (PKCE) and lets the super admin pick or create a base, then push the 13-table schema into it.
+Two paths:
 
-### 1. Register an OAuth integration on Airtable
+1. **Production (Vercel + Supabase + Airtable)** — multi-tenant Next.js app with magic-link auth and per-org Airtable integrations. See **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for step-by-step setup.
+2. **Local single-tenant CLI** — `npm run admin:local` launches a small Express console with filesystem-based encrypted token storage. Useful for solo development; not recommended for deployment.
 
-1. Visit https://airtable.com/create/oauth.
-2. Create a new integration. Redirect URI: `http://localhost:3000/auth/callback` (for local admin use).
-3. Request these scopes: `data.records:read`, `data.records:write`, `schema.bases:read`, `schema.bases:write`.
-4. Copy the **Client ID** (and Client Secret if you chose confidential).
+### Production quick start
 
-### 2. Set env and run
+Prerequisites:
+
+- Supabase project (apply `supabase/migrations/20260418000000_init.sql`).
+- Airtable OAuth integration (<https://airtable.com/create/oauth>) with scopes `data.records:read/write`, `schema.bases:read/write` and redirect URI `https://<your>/api/airtable/callback`.
+- Vercel project with the env vars listed in `.env.example`.
+
+Then:
 
 ```
-cp .env.example .env
-# fill AIRTABLE_CLIENT_ID and CANONLAW_MASTER_KEY (32-byte hex)
 npm install
-npm run admin
+npm run dev     # local
+npm run build   # production build (Vercel runs this)
 ```
 
-Then open http://localhost:3000.
+The super-admin flow:
 
-### 3. Flow
+1. Visit `/` → **Sign in** with email → click the magic link.
+2. Create an **Organization** — you become its super-admin.
+3. **Connect Airtable** → approve scopes → pick an existing base or create a new one from the 13-table schema.
+4. **Sync schema** + **Seed grounds** to finish provisioning.
 
-1. Click **Connect Airtable** → you're redirected to Airtable's consent screen.
-2. Approve the scopes → Airtable redirects back to the admin console.
-3. **Bases** page lists every base the token can see. Either:
-   - Click **Select** on an existing base, or
-   - Enter a **Workspace ID** and click **Create base** to provision a fresh base from `schema/airtable-schema.json`.
-4. Once a base is selected, click **Sync schema into this base** to upsert any missing tables and fields (never destructive).
-5. Click **Seed canonical grounds of nullity** to insert the 28 canonical grounds (cc. 1083–1108) into the Grounds of Nullity table.
+Tokens are encrypted at rest in Supabase via `pgsodium`; RLS ensures one tenant can never see another's integration.
 
-### 4. What gets stored
+### Local CLI (legacy)
 
-Tokens and base selection persist in `~/.canonlaw-tribunal/config.json.enc`, encrypted with AES-256-GCM keyed on `CANONLAW_MASTER_KEY`. Refresh happens automatically when the access token is within 60s of expiry.
+```
+AIRTABLE_CLIENT_ID=... CANONLAW_MASTER_KEY=$(openssl rand -hex 32) npm run admin:local
+```
 
-### 5. Security notes
-
-- `CANONLAW_MASTER_KEY` is **required** in production (`NODE_ENV=production`); the store refuses to persist with a volatile key.
-- The admin console is unauthenticated by default. Do not expose port 3000 to the internet. Run it locally, or behind an authenticating reverse proxy with your SSO of choice.
-- For production deployments, swap `ConfigStore` for a real secret manager (AWS Secrets Manager, GCP Secret Manager, Vault). The interface is small — `load`, `save`, `update`.
+Opens <http://localhost:3000> with the same flow. Config lands encrypted at `~/.canonlaw-tribunal/config.json.enc`.
 
 ## Intended integration
 
