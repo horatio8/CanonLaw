@@ -15,3 +15,8 @@ export * from "./permissions/matrix.ts";
 export * from "./incompatibility/rules.ts";
 export * from "./documents/templates.ts";
 export * from "./automations/recipes.ts";
+export * from "./airtable/oauth.ts";
+export * from "./airtable/client.ts";
+export * from "./airtable/config-store.ts";
+export * from "./airtable/provisioner.ts";
+export * from "./airtable/server.ts";

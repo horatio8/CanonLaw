@@ -131,6 +131,48 @@ Provisioning approach: pass this file to an Airtable Metadata API client to crea
 
 ---
 
+## Super-admin: connect Airtable & select a base
+
+The repo ships with a small HTTP admin console that handles Airtable OAuth 2.0 (PKCE) and lets the super admin pick or create a base, then push the 13-table schema into it.
+
+### 1. Register an OAuth integration on Airtable
+
+1. Visit https://airtable.com/create/oauth.
+2. Create a new integration. Redirect URI: `http://localhost:3000/auth/callback` (for local admin use).
+3. Request these scopes: `data.records:read`, `data.records:write`, `schema.bases:read`, `schema.bases:write`.
+4. Copy the **Client ID** (and Client Secret if you chose confidential).
+
+### 2. Set env and run
+
+```
+cp .env.example .env
+# fill AIRTABLE_CLIENT_ID and CANONLAW_MASTER_KEY (32-byte hex)
+npm install
+npm run admin
+```
+
+Then open http://localhost:3000.
+
+### 3. Flow
+
+1. Click **Connect Airtable** → you're redirected to Airtable's consent screen.
+2. Approve the scopes → Airtable redirects back to the admin console.
+3. **Bases** page lists every base the token can see. Either:
+   - Click **Select** on an existing base, or
+   - Enter a **Workspace ID** and click **Create base** to provision a fresh base from `schema/airtable-schema.json`.
+4. Once a base is selected, click **Sync schema into this base** to upsert any missing tables and fields (never destructive).
+5. Click **Seed canonical grounds of nullity** to insert the 28 canonical grounds (cc. 1083–1108) into the Grounds of Nullity table.
+
+### 4. What gets stored
+
+Tokens and base selection persist in `~/.canonlaw-tribunal/config.json.enc`, encrypted with AES-256-GCM keyed on `CANONLAW_MASTER_KEY`. Refresh happens automatically when the access token is within 60s of expiry.
+
+### 5. Security notes
+
+- `CANONLAW_MASTER_KEY` is **required** in production (`NODE_ENV=production`); the store refuses to persist with a volatile key.
+- The admin console is unauthenticated by default. Do not expose port 3000 to the internet. Run it locally, or behind an authenticating reverse proxy with your SSO of choice.
+- For production deployments, swap `ConfigStore` for a real secret manager (AWS Secrets Manager, GCP Secret Manager, Vault). The interface is small — `load`, `save`, `update`.
+
 ## Intended integration
 
 The core engines are **pure TypeScript**. A deployment pulls them into one of:
