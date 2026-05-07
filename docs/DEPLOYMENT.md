@@ -39,9 +39,10 @@ High-level topology:
      ```
      npx supabase link --project-ref <your-project-ref>
      npx supabase db push
+     psql "$DATABASE_URL" -f supabase/seed.sql    # optional: seed demo account
      ```
-   - **Option B (manual):** open **SQL Editor**, paste `supabase/migrations/20260418000000_init.sql`, run.
-4. Under **Authentication → Providers → Email**, make sure **Magic Link** is enabled.
+   - **Option B (manual):** open **SQL Editor**, paste `supabase/migrations/20260418000000_init.sql`, run. Then paste `supabase/seed.sql` (optional, for the demo account).
+4. Under **Authentication → Providers → Email**, make sure **Email** is enabled. For the demo flow, you may want to **disable "Confirm email"** so new accounts can sign in immediately. The demo seed user is pre-confirmed regardless.
 5. Under **Authentication → URL Configuration**:
    - **Site URL:** your production Vercel URL (e.g. `https://canonlaw.example.com`).
    - **Redirect URLs:** add `https://<your-domain>/auth/callback` (and your Vercel preview pattern if desired: `https://*.vercel.app/auth/callback`).
@@ -104,14 +105,29 @@ On your Supabase project → **Authentication → URL Configuration**, set the S
 
 ## 5. First run (super-admin bootstrap)
 
-1. Open `https://<your-vercel-domain>`.
-2. **Sign in** with your email → click the magic link from your inbox.
-3. You land on `/admin/orgs`. **Create an organization** — a name and a slug. You become its super-admin automatically.
-4. Go to **Status**. Click **Connect Airtable**. Approve on Airtable. You're redirected to **Bases**.
-5. Either **Select** an existing base or enter a **Workspace ID** to have the app create a new base from the 13-table schema.
-6. Click **Sync schema into this base** to add any missing tables/fields. Then **Seed canonical grounds of nullity**.
+### Demo account (fastest path)
 
-Your tribunal base is now fully wired. Other users at your organization can sign in and be added as `admin` or `member` (via SQL for now — `org_members` table).
+If you ran `supabase/seed.sql`, a pre-confirmed demo user and a "Demo Tribunal" organization already exist:
+
+| Field | Value |
+|-------|-------|
+| URL | `https://<your-vercel-domain>/login` |
+| Email | `vicar@example.com` |
+| Password | `Tribunal2026!` |
+| Org | Demo Tribunal (you are super-admin) |
+
+Log in, go to **Status**, click **Connect Airtable**, approve scopes, then on **Bases** either pick an existing base or create a new one. Finally **Sync schema** + **Seed canonical grounds of nullity**.
+
+> ⚠️ Change the demo password (or delete the demo user) before any real data goes anywhere near this.
+
+### Fresh account flow
+
+1. Open `https://<your-vercel-domain>` → **Sign in** → click **Create account**.
+2. If "Confirm email" is enabled in Supabase, click the confirmation link, then sign back in.
+3. You land on `/admin/orgs`. **Create an organization** — name + slug. You become its super-admin.
+4. **Status** → **Connect Airtable** → approve → **Bases** → select or create → **Sync schema** → **Seed grounds**.
+
+Other users at your organization can sign up, then a super-admin adds them to `org_members` (via SQL for now) as `admin` or `member`.
 
 ## 6. Local development
 

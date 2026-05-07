@@ -154,10 +154,22 @@ npm run dev     # local
 npm run build   # production build (Vercel runs this)
 ```
 
+### Demo credentials
+
+If you applied `supabase/seed.sql`, the project ships with a pre-confirmed demo account and a "Demo Tribunal" organization:
+
+| | |
+|---|---|
+| **Email** | `vicar@example.com` |
+| **Password** | `Tribunal2026!` |
+| **Org** | Demo Tribunal (you are super-admin) |
+
+Log in, click **Connect Airtable**, then pick or create a base. Change or delete this account before going to production.
+
 The super-admin flow:
 
-1. Visit `/` → **Sign in** with email → click the magic link.
-2. Create an **Organization** — you become its super-admin.
+1. Visit `/` → **Sign in** with email + password (or **Create account**).
+2. Create an **Organization** if you don't already have one — you become its super-admin.
 3. **Connect Airtable** → approve scopes → pick an existing base or create a new one from the 13-table schema.
 4. **Sync schema** + **Seed grounds** to finish provisioning.
 
