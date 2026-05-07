@@ -19,10 +19,11 @@ export default async function AdminLayout({ children }: { children: ReactNode })
       <nav>
         <div>
           <Link href="/admin">Status</Link>
+          <Link href="/admin/cases">Cases</Link>
+          <Link href="/admin/personnel">Personnel</Link>
           <Link href="/admin/bases">Bases</Link>
           <Link href="/admin/orgs">Organizations</Link>
-        </div>
-        <div style={{ display: "flex", gap: ".5rem", alignItems: "center" }}>
+        </div>        <div style={{ display: "flex", gap: ".5rem", alignItems: "center" }}>
           {memberships.length > 1 && currentOrgId ? (
             <form action={switchOrg}>
               <select name="orgId" defaultValue={currentOrgId} onChange={undefined}>
