@@ -5,7 +5,13 @@
 --   Password: Tribunal2026!
 --   Org:      "Demo Tribunal" (slug: demo-tribunal)
 --
--- The user is added to the org as super_admin.
+-- ⚠️  PREFER `npm run seed:demo` (scripts/seed-demo.ts). This raw SQL writes
+-- directly to auth.users which CAN BREAK across Supabase versions whenever
+-- they add a NOT-NULL column to the auth schema. The Node script uses the
+-- Supabase Admin API and is version-stable.
+--
+-- This file is kept for offline / dashboard-only setups. If sign-in fails
+-- after running this seed, try `npm run seed:demo` instead.
 --
 -- Run AFTER 20260418000000_init.sql:
 --   supabase db reset             (locally; resets + applies migrations + seed)

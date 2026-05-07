@@ -156,7 +156,7 @@ npm run build   # production build (Vercel runs this)
 
 ### Demo credentials
 
-If you applied `supabase/seed.sql`, the project ships with a pre-confirmed demo account and a "Demo Tribunal" organization:
+After applying the schema migration, run `npm run seed:demo` (uses Supabase Admin API — version-stable). The project ships with a pre-confirmed demo account and a "Demo Tribunal" organization:
 
 | | |
 |---|---|

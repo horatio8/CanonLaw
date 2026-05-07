@@ -39,9 +39,16 @@ High-level topology:
      ```
      npx supabase link --project-ref <your-project-ref>
      npx supabase db push
-     psql "$DATABASE_URL" -f supabase/seed.sql    # optional: seed demo account
      ```
-   - **Option B (manual):** open **SQL Editor**, paste `supabase/migrations/20260418000000_init.sql`, run. Then paste `supabase/seed.sql` (optional, for the demo account).
+   - **Option B (manual):** open **SQL Editor**, paste `supabase/migrations/20260418000000_init.sql`, run.
+
+   Then seed the demo user (use the **script** — it's version-stable across Supabase releases; the raw-SQL `supabase/seed.sql` may break when Supabase adds NOT-NULL columns to `auth.users`):
+     ```
+     export NEXT_PUBLIC_SUPABASE_URL=https://<ref>.supabase.co
+     export SUPABASE_SERVICE_ROLE_KEY=eyJ...    # from Project Settings → API
+     npm run seed:demo
+     ```
+   It's idempotent — if the user exists it just resets the password and re-asserts super-admin membership.
 4. Under **Authentication → Providers → Email**, make sure **Email** is enabled. For the demo flow, you may want to **disable "Confirm email"** so new accounts can sign in immediately. The demo seed user is pre-confirmed regardless.
 5. Under **Authentication → URL Configuration**:
    - **Site URL:** your production Vercel URL (e.g. `https://canonlaw.example.com`).

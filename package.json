@@ -9,7 +9,8 @@
     "start": "next start",
     "test": "node --test --experimental-strip-types tests/deadlines.test.ts tests/gates.test.ts tests/incompatibility.test.ts tests/permissions.test.ts tests/documents.test.ts tests/state-machine.test.ts tests/automations.test.ts tests/airtable.test.ts",
     "typecheck": "tsc --noEmit",
-    "admin:local": "node --experimental-strip-types scripts/admin.ts"
+    "admin:local": "node --experimental-strip-types scripts/admin.ts",
+    "seed:demo": "node --experimental-strip-types scripts/seed-demo.ts"
   },
   "keywords": [
     "canon-law",

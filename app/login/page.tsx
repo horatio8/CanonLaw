@@ -20,7 +20,21 @@ export default async function LoginPage({
           your inbox to activate the account.
         </div>
       ) : null}
-      {searchParams.error ? <div className="flash error">{searchParams.error}</div> : null}
+      {searchParams.error ? (
+        <div className="flash error">
+          {searchParams.error}
+          {/^invalid login credentials/i.test(searchParams.error) ? (
+            <>
+              <br />
+              <span style={{ fontSize: ".9em" }}>
+                If you intended to use the demo account but haven't seeded it yet, run{" "}
+                <code>npm run seed:demo</code> with{" "}
+                <code>SUPABASE_SERVICE_ROLE_KEY</code> set, then try again.
+              </span>
+            </>
+          ) : null}
+        </div>
+      ) : null}
 
       <form>
         <input type="hidden" name="next" value={searchParams.next ?? "/admin"} readOnly />
